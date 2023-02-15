@@ -1,13 +1,13 @@
 require_relative "axby1.rb"
 
 =begin rdoc
-This faile adds generate_egypt method to Rational class.
+This file adds generate_unit_fractions method to the Rational class.
 It generates a sum of unit fractions that the denominators are all different.
 For example,
 
 3/4 = 1/2 + 1/6 + 1/12
 
-The sum can be two or more patterns.
+The sum can have two or more patterns.
 
 3/4 = 1/2 + 1/6 + 1/12 = 1/2 + 1/4
 
