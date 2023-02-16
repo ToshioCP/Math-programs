@@ -7,7 +7,7 @@ require 'rdoc/task'
 task default: :nojekyll
 
 task nojekyll: :rdoc do
-  touch "doc/.nojekyll"
+  touch "docs/.nojekyll"
 end
 
 # RDoc::Task creates the following tasks.
@@ -18,6 +18,6 @@ end
 RDoc::Task.new do |rdoc|
   rdoc.main = "README.md"
   rdoc.title = "Math Programs"
-  rdoc.rdoc_dir = "doc"
+  rdoc.rdoc_dir = "docs"
   rdoc.rdoc_files.include("README.md", "axby1.rb", "unit_fractions.rb")
 end
