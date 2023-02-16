@@ -6,11 +6,17 @@ This repository includes programs for mathematics.
 - unit\_fractions: extends Rational class. The method generate\_unit\_fractions generates a sum of unit fractions.
 This is seen in the Rhind Mathematical Papyrus.
 
-# How to use them
+# Demo
 
-- axby1.rb: Uncommnet the last 10 lines and run `ruby axby1.rb 10 7` on the command line.
-- unit\_fractions.rb: Uncommnet the last 2 lines and run `ruby unit_fractions.rb 3 4` on the command line.
+A file "demo.rb" is a demo program.
 
+```
+$ ruby demo.rb 3 8
+----- axby1.rb -----
+3 x (3) + 8 x (-1) = 1
+----- unit_fractions.rb -----
+3/8 = 1/3 + 1/24
+```
 
 # License
 

@@ -74,7 +74,6 @@
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-new">::new</a>
     <li ><a href="#method-i-solve">#solve</a>
-    <li ><a href="#method-i-solve_bf">#solve_bf</a>
   </ul>
 </div>
 
@@ -88,7 +87,7 @@
 
   <section class="description">
     
-<p>The class <a href="Axby1.html"><code>Axby1</code></a> is an equation ax+by=1. When it is created, two arguments are given. They are the constnts a and b. An instance method solve returns a pair of the solution [x, y].</p>
+<p>The class <a href="Axby1.html"><code>Axby1</code></a> is an equation ax+by=1. When it is created, two arguments are given. They are the constants a and b. An instance method ‘solve’ returns a pair of the solution [x, y].</p>
 
 <p>It uses euclidian algorithm.</p>
 
@@ -139,7 +138,7 @@
         </div>
 
         <div class="method-description">
-          <p>Two arguments a and b are the constants of ax+by=1. a and b must be coprime. Otherwise the methods solve and <a href="Axby1.html#method-i-solve_bf"><code>solve_bf</code></a> returns nil.</p>
+          <p>Two arguments a and b are the constants of ax+by=1. a and b must be coprime. Otherwise the methods ‘solve’ returns nil.</p>
 
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File axby1.rb, line 14</span>
@@ -187,45 +186,17 @@
 
   <span class="ruby-identifier">e</span> = []
   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">pop</span>
-  <span class="ruby-identifier">e</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>],<span class="ruby-value">1</span>,<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>],<span class="ruby-operator">-</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">2</span>]<span class="ruby-value">-1</span>)]
+  <span class="ruby-comment"># a[1] = 1 or -1</span>
+  <span class="ruby-identifier">e</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>],<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>],<span class="ruby-operator">-</span><span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">*</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">2</span>]<span class="ruby-value">-1</span>)]
   <span class="ruby-keyword">while</span> (<span class="ruby-identifier">a</span> = <span class="ruby-identifier">d</span>.<span class="ruby-identifier">pop</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">e</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">3</span>],<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>],<span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">1</span>]<span class="ruby-operator">-</span><span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">3</span>]<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>[<span class="ruby-value">2</span>]]
   <span class="ruby-keyword">end</span>
-  
+
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>
     [<span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">1</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">3</span>]]
   <span class="ruby-keyword">else</span>
     [<span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">1</span>]<span class="ruby-operator">+</span><span class="ruby-ivar">@b</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">-1</span>][<span class="ruby-value">3</span>]<span class="ruby-operator">-</span><span class="ruby-ivar">@a</span>]
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div id="method-i-solve_bf" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">solve_bf</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-
-        <div class="method-description">
-          <p>Returns the solution of ax+by=1. It uses brute-force algorithm (searches [0,a-1] for the solution). So it takes long time if a is a big number (for example, 1 billion).</p>
-
-          <div class="method-source-code" id="solve_bf-source">
-            <pre><span class="ruby-comment"># File axby1.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">solve_bf</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@a</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@b</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">y</span> = <span class="ruby-value">0</span>
-  <span class="ruby-keyword">until</span> ((<span class="ruby-value">1</span><span class="ruby-operator">+</span><span class="ruby-ivar">@b</span><span class="ruby-operator">*</span><span class="ruby-identifier">y</span>).<span class="ruby-identifier">modulo</span>(<span class="ruby-ivar">@a</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>) <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">y</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">x</span> = (<span class="ruby-value">1</span><span class="ruby-operator">+</span><span class="ruby-ivar">@b</span><span class="ruby-operator">*</span><span class="ruby-identifier">y</span>)<span class="ruby-operator">/</span><span class="ruby-ivar">@a</span>
-  [<span class="ruby-identifier">x</span>,<span class="ruby-operator">-</span><span class="ruby-identifier">y</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

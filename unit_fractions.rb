@@ -42,7 +42,3 @@ class Rational
     return s.reverse
   end
 end
-
-#test
-# r = Rational(ARGV[0].to_i,ARGV[1].to_i)
-# print "#{r} = #{r.generate_unit_fractions.map{|x| x.to_s}.join(" + ")}\n"
