@@ -19,5 +19,5 @@ RDoc::Task.new do |rdoc|
   rdoc.main = "README.md"
   rdoc.title = "Math Programs"
   rdoc.rdoc_dir = "docs"
-  rdoc.rdoc_files.include("README.md", "axby1.rb", "unit_fractions.rb")
+  rdoc.rdoc_files.include("README.md", "axby1.rb", "unit_fractions.rb", "e10p.rb")
 end

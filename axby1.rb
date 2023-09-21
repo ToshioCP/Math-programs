@@ -9,7 +9,7 @@ It uses euclidian algorithm.
 class Axby1
   attr_accessor :a, :b
   # Two arguments a and b are the constants of ax+by=1.
-  # a and b must be coprime.
+  # They must be coprime.
   # Otherwise the methods 'solve' returns nil.
   def initialize a = nil, b = nil
     if a.instance_of?(Integer) && b.instance_of?(Integer) && a.gcd(b) == 1
