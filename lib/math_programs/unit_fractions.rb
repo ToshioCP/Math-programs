@@ -1,5 +1,7 @@
 require_relative "axby1.rb"
 
+include MathPrograms
+
 =begin rdoc
 This file adds generate_unit_fractions method to the Rational class.
 It generates a sum of unit fractions that the denominators are all different.

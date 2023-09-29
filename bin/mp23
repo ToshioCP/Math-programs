@@ -1,0 +1,163 @@
+#!/usr/bin/env ruby
+
+=begin rdoc
+This file is named <tt>mp23</tt>, which means 'Math Programs, made in 2023'.
+It has sub-command.
+
+[<tt>demo</tt>] Demonstrate all the libraries.
+[<tt>axby1</tt>] Solve Bézout's equation.
+[<tt>unit_fractions</tt>] Convert a common fraction into unit fractions.
+[<tt>e10p</tt>] Solve extracted TenPuzzle.
+[<tt>acr</tt>] Calculate the argument as rational numbers.
+
+Example.
+
+ $ mp23 axby1 3 5
+ 3 x (2) + 5 x (-1) = 1
+ $mp23 unit_fractions 3 5
+ 3/5 = 1/2 + 1/10
+ $mp23 e10p 3 4 5 7 10
+ [3, 4, 5, 7], 10
+ 3*4+5-7
+ $mp23 arc 1/2+1/3
+ 5/6
+=end
+
+require "readline"
+require "math_programs"
+
+include MathPrograms
+
+@subcommands = %w(demo axby1 unit_fractions e10p acr)
+
+def usage
+  $stderr.print "Usage: mp23 subcommand args...\n"
+  $stderr.print "subcommand: one of #{@subcommands.join(', ')}.\n"
+end
+
+def demo
+  print "----- axby1.rb -----\n"
+  print "This app solves an equation ax+by=1\n"
+  print "Input a and b.\n"
+  print "Delimit the arguments with blank character.\n"
+  buf = Readline.readline("> ", false)
+  a, b = buf.split(/ +/).map{|s| s.to_i}
+  axby1 = Axby1.new(a, b)
+  x, y = axby1.solve
+  if x != nil
+    print "#{a} x (#{x}) + #{b} x (#{y}) = 1\n"
+  end
+
+  print "----- unit_fractions.rb -----\n"
+  print "This app expands a fraction a/b into the sequence of unit fractions.\n"
+  print "Input a and b.\n"
+  print "Delimit the arguments with blank character.\n"
+  buf = Readline.readline("> ", false)
+  r = Rational(*buf.split(/ +/).map{|s| s.to_i})
+  print "#{r} = #{r.generate_unit_fractions.map{|x| x.to_s}.join(" + ")}\n"
+
+  print "----- e10p.rb (extracted TenPuzzle) -----\n"
+  print "This app finds an expression with the numbers and basic arithmetic operations and its calculation result equals what you gave.\n"
+  print "Input integers a, b, ... and result.\n"
+  print "Delimit the arguments with blank character.\n"
+  buf = Readline.readline("> ", false)
+  array = buf.split(/ +/).map{|s| s.to_i}
+  sum = array.pop
+  puzzle = E10P.new(array, sum)
+  print "#{puzzle.problem}\n"
+  print "#{puzzle.solve}\n"
+
+  print "----- acr.rb (Arithmetic Calculator with Rational numbers) -----\n"
+  print "This app calculates an expression with rational numbers.\n"
+  print "Give an expression with rational numbers.\n"
+  print "For example, 1/2+1/3.\n"
+  buf = Readline.readline("> ", false)
+  r = ACR.new(buf).calc
+  r = r.to_i if r.denominator == 1
+  print "#{r}\n"
+end
+
+def usage_axby1
+  $stderr.print "Usage: mp23 axby1 a b\n"
+  $stderr.print "This program gives one solution of a Bézout's equation ax+by=1.\n"
+  $stderr.print "The coefficients a and b must be coprime.\n"
+end
+
+def axby1
+  if ARGV.size != 2 || /[0-9]+/ !~ ARGV[0] || /[0-9]+/ !~ ARGV[1]
+    usage_axby1
+  else
+    a, b = ARGV.map{|s| s.to_i}
+    axby1 = Axby1.new(a, b)
+    x, y = axby1.solve
+    if x == nil
+      usage
+    else
+      print "#{a} x (#{x}) + #{b} x (#{y}) = 1\n"
+    end
+  end
+end
+
+def usage_unit_fractions
+  $stderr.print "Usage: mp23 unit_fractions a b\n"
+  $stderr.print "The arguments a and b are integers and b is non-zero.\n"
+  $stderr.print "This program gives a sum of unit fractions and the sum equals a/b.\n"
+end
+
+def unit_fractions
+  if ARGV.size != 2 || ! ARGV.all?(/\A[0-9]+\Z/) || ARGV[1].to_i == 0
+    usage_unit_fractions
+  else
+    a, b = ARGV.map{|s| s.to_i}
+    r = Rational(a, b)
+    print "#{r} = #{r.generate_unit_fractions.map{|x| x.to_s}.join(" + ")}\n"
+  end
+end
+
+def usage_e10p
+  $stderr.print "Usage: mp23 e10p a b ... result\n"
+  $stderr.print "This app finds an expression with the numbers a, b, ..."
+        " and basic arithmetic operations and its calculation result equals the 'result' you gave.\n"
+  $stderr.print "Example:\n"
+  $stderr.print "$ mp23 e10p 3 5 6 7 10\n"
+  $stderr.print "7-6/(3-5)\n"
+end
+
+def e10p
+  if ARGV.size < 2 || ! ARGV.all?(/\A[0-9]+\Z/)
+    usage_e10p
+  else
+    array = ARGV.map{|s| s.to_i}
+    result = array.pop
+    puzzle = E10P.new(array, result)
+    print "#{puzzle.solve}\n"
+  end
+end
+
+def usage_acr
+  $stderr.print "Usage: mp23 acr expression\n"
+  $stderr.print "This finds the result of the expression with rational numbers.\n"
+  $stderr.print "Example:\n"
+  $stderr.print "$ mp23 acr 1/2+1/3\n"
+  $stderr.print "5/6\n"
+  $stderr.print "If the expression is wrong, a blank line is printed.\n"
+end
+
+def acr
+  if ARGV.size != 1
+    usage_acr
+  else
+    print "#{ACR.new(ARGV[0]).calc}\n"
+  end
+end
+
+unless @subcommands.include?(ARGV[0])
+  usage
+  exit
+end
+@subcommands.each do |subcommand|
+  if ARGV[0] == subcommand
+    ARGV.delete_at(0)
+    send(subcommand)
+  end
+end

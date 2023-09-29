@@ -60,6 +60,7 @@
   <h3>Pages</h3>
 
   <ul class="link-list">
+    <li><a href="./License_md.html">License</a>
     <li><a href="./README_md.html">README</a>
   </ul>
 </div>
@@ -68,12 +69,17 @@
   <h3>Class and Module Index</h3>
 
   <ul class="link-list">
-  <li><code><a href="./Axby1.html">Axby1</a></code>
-  <li><details><summary><code><a href="./E10P.html">E10P</a></code></summary>
+  <li><details><summary><code><a href="./MathPrograms.html">MathPrograms</a></code></summary>
   <ul class="link-list">
-  <li><code><a href="./E10P/Node.html">Node</a></code>
+  <li><code><a href="./MathPrograms/ACR.html">ACR</a></code>
+  <li><code><a href="./MathPrograms/Axby1.html">Axby1</a></code>
+  <li><details><summary><code><a href="./MathPrograms/E10P.html">E10P</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./MathPrograms/E10P/Node.html">Node</a></code>
+  </ul></details>
   </ul></details>
   <li><code><a href="./Numeric.html">Numeric</a></code>
+  <li><code><a href="./Object.html">Object</a></code>
   <li><code><a href="./Rational.html">Rational</a></code>
 </div>
 
@@ -85,20 +91,42 @@
 
 <h1 id="label-Mathematics+programs">Mathematics programs<span><a href="#label-Mathematics+programs">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>This repository includes programs for mathematics.</p>
+<p>This repository includes libraries for mathematics.</p>
 <ul><li>
-<p>axby1.rb: Solves the equation ax+by=1. All the variables are integer. The coefficients a and b must be coprime.</p>
+<p><code>axby1.rb</code>: Solves the equation ax+by=1. All the variables are integer. The coefficients a and b must be coprime.</p>
 </li><li>
-<p>unit_fractions: This library extends <a href="Rational.html"><code>Rational</code></a> class. The method “generate_unit_fractions” generates a sum of unit fractions. This is seen in the Rhind Mathematical Papyrus.</p>
+<p><code>unit_fractions</code>: This library extends <a href="Rational.html"><code>Rational</code></a> class. The method “generate_unit_fractions” generates a sum of unit fractions. This is seen in the Rhind Mathematical Papyrus.</p>
 </li><li>
-<p>e10p.rb: Solves a extended TenPuzzle like this. Find an expression with integers 1,2,3,4,5 and +-*/() and the value equals 9. One of the answer is -1+2*3+4=9.</p>
+<p><code>e10p.rb</code>: Solves a extended TenPuzzle like this. Find an expression with integers 1,2,3,4,5 and +-*/() and the value equals 9. One of the answer is -1+2*3+4=9.</p>
+</li><li>
+<p><code>acr.rb</code>: Arithmetic Calculator with <a href="Rational.html"><code>Rational</code></a> numbers. For example, if “1/2+1/3” is given, it finds 5/6.</p>
 </li></ul>
+
+<h1 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<ol><li>
+<p>Build the gem. Type “gem build math_programs”.</p>
+</li><li>
+<p>Install the gem. Type “gem install math_programs.gem”.</p>
+</li></ol>
 
 <h1 id="label-Demo">Demo<span><a href="#label-Demo">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>A file “demo.rb” is a demo program.</p>
+<p>A command “mp23” is available. It has subcommands.</p>
+<ul><li>
+<p>demo</p>
+</li><li>
+<p>axby1</p>
+</li><li>
+<p>unit_fractions</p>
+</li><li>
+<p>e10p</p>
+</li><li>
+<p>acr</p>
+</li></ul>
 
-<pre>$ ruby demo.rb
+<p>The subcommand “demo” demonstrates all the features.</p>
+
+<pre>$ ruby mp23 demo
 ----- axby1.rb -----
 Input a and b.
 Delimit the arguments with blank character.
@@ -110,16 +138,21 @@ Delimit the arguments with blank character.
 &gt; 3 5
 3/5 = 1/2 + 1/10
 ----- e10p.rb (extracted TenPuzzle) -----
-This app finds an expression with the numbers and basic arithmetic operations and its value equals the sum you gave.
-Input integers a, b, ... and sum.
+This app finds an expression with the numbers and basic arithmetic operations and its calculation result equals what you gave.
 Delimit the arguments with blank character.
 &gt; 2 4 5 6 24
 [2, 4, 5, 6], 24
-5*6-(2+4)</pre>
+5*6-(2+4)
+----- acr.rb (Arithmetic Calculator with Rational numbers) -----
+This app calculates an expression with rational numbers.
+Give an expression with rational numbers.
+For example, 1/2+1/3.
+&gt; 2/3+4*5/6
+4</pre>
 
-<h1 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="label-License"><a href="License_md.html">License</a><span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>GPL. See <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a>.</p>
+<p>GPL. See <a href="License_md.html">License.md</a>.</p>
 
 </main>
 
