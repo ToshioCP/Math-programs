@@ -1,11 +1,15 @@
-# This "Rakefile" just build HTML files.
-
-# Just type 'rake' to create HTML documents.
+# TYpe 'rake' to compile racc/acr.y into lib/math_programs/acr.rb
+# Type 'rake rdoc' to create HTML documents.
 # Type 'rake test' for the test.
 
 require "rdoc/task"
 require "rake/testtask"
 
+task default: "lib/math_programs/acr.rb"
+
+file "lib/math_programs/acr.rb" => "racc/acr.y" do
+  sh "racc -o lib/math_programs/acr.rb racc/acr.y"
+end
 # RDoc::Task creates the following tasks.
 # [rdoc] Generate RDoc files
 # [clobber_rdoc] Delete all the rdoc files.
